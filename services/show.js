@@ -5,9 +5,9 @@ const createShow = async (reqBody) => {
   return show;
 };
 
-const getShow = async () => {
-  const show = await ShowSchema.find();
-  return show;
+const getShows = async () => {
+  const shows = await ShowSchema.find();
+  return shows;
 };
 
 const getShowById = async (showId) => {
@@ -27,22 +27,20 @@ const deleteShow = async (showId) => {
 const updateShow = async (showId, updateParam) => {
   const show = await getShowById(showId);
   Object.assign(show, updateParam);
-  show.save();
+  await show.save();
   return show;
 };
 
-const createShowReview = async (showId) => {
-  const show = await ShowSchema.findById(showId);
-  if (!show) {
-    throw new Error("Not found");
-  }
-  const showReview = await ShowSchema.create(reqBody);
-  return showReview;
+const createShowReview = async (showId, review) => {
+  const show = await getShowById(showId);
+  show.reviews.push(review);
+  await show.save();
+  return show.reviews[show.reviews.length - 1];
 };
 
 module.exports = {
   createShow,
-  getShow,
+  getShows,
   getShowById,
   deleteShow,
   updateShow,

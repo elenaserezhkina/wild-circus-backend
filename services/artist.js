@@ -5,9 +5,9 @@ const createArtist = async (reqBody) => {
   return artist;
 };
 
-const getArtist = async () => {
-  const artist = await ArtistSchema.find();
-  return artist;
+const getArtists = async () => {
+  const artists = await ArtistSchema.find();
+  return artists;
 };
 
 const getArtistById = async (artistId) => {
@@ -33,7 +33,7 @@ const updateArtist = async (artistId, updateParam) => {
 
 module.exports = {
   createArtist,
-  getArtist,
+  getArtists,
   getArtistById,
   deleteArtist,
   updateArtist,
