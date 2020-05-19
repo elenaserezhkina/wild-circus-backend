@@ -25,7 +25,7 @@ const showSchema = new mongoose.Schema({
       text: { type: String },
     },
   ],
-  favorite: { type: Boolean, default: false },
+  isFavorite: { type: Boolean, default: false },
 });
 
 const Show = mongoose.model("Show", showSchema);

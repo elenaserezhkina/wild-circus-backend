@@ -4,9 +4,12 @@ const createShow = async (req, res, next) => {
   console.log("req", req.body);
   try {
     const show = await showService.createShow({
-      name: req.body.name,
-      role: req.body.role,
-      image: req.body.img,
+      title: req.body.title,
+      description: req.body.description,
+      image: req.body.image,
+      artists: req.body.artists,
+      reviews: req.body.reviews,
+      isFavorite: req.body.isFavorite,
     });
     res.status(200).json({ result: show });
   } catch (err) {
@@ -17,6 +20,7 @@ const createShow = async (req, res, next) => {
 const getShows = async (req, res, next) => {
   try {
     const shows = await showService.getShows();
+    console.log(shows);
     res.status(200).json({ result: shows });
   } catch (err) {
     next(err);
@@ -32,7 +36,7 @@ const getShowById = async (req, res, next) => {
   }
 };
 
-const deleteShow = async (req, res, next) => {
+const deleteShowById = async (req, res, next) => {
   try {
     const show = await showService.deleteShow(req.params.id);
     res.status(200).json({ result: "done", deleteShow: show });
@@ -41,7 +45,7 @@ const deleteShow = async (req, res, next) => {
   }
 };
 
-const updateShow = async (req, res, next) => {
+const updateShowById = async (req, res, next) => {
   try {
     const show = await showService.updateShow(req.params.id, req.body);
     res.status(200).json({ result: "done", updateShow: show });
@@ -66,7 +70,7 @@ module.exports = {
   createShow,
   getShows,
   getShowById,
-  deleteShow,
-  updateShow,
+  deleteShowById,
+  updateShowById,
   createShowReview,
 };
